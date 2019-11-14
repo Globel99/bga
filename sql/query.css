@@ -1,0 +1,21 @@
+*{
+    font-size: 24px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: left;
+    overflow: hidden;
+}
+.row > div{
+    float: left;
+    width: 200px;
+    border-left: 1px dashed lightgrey;
+    border-right: 1px dashed lightgrey;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    padding-left: 10px;
+}
+body{
+    text-align: center;
+}
+.main{
+    display: inline-block;
+}

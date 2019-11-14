@@ -1,0 +1,7 @@
+
+#####THE FOLLOWING IS REQUIRED FOR PROTECTED FOLDERS
+AuthUserFile /home/vol3_8/epizy.com/epiz_24762160/htdocs/sql//.htpasswd.64aef0fd2ce42ec7e66c2c0cc199c0a6
+AuthName password_required
+AuthType Basic
+Require valid-user
+########END REQUIRE

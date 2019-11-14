@@ -1,0 +1,12 @@
+<?php
+        echo $current_tile;
+        $sql = "select * from buildings where tile = $current_tile";
+        $result = mysqli_query($conn, $sql);
+
+        while($row = mysqli_fetch_assoc($result)) {
+            $filename = str_replace(" ", "_", strtolower($row["building"]));
+            $url = "http://bga.rf.gd/buildings/".$filename.".php?t=".$_GET["t"];
+
+            echo "<br><a href='".$url."'>".$row["building"]." - ".$row["level"]."</a>\n";
+        }
+        ?>

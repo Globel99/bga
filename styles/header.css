@@ -1,0 +1,64 @@
+#header{
+    display: table;
+    border-collapse: separate;
+    border-spacing: 5px;
+    color: black;
+    height: 12%;
+    margin: 1%;
+    width: 98%;
+}
+#menu, #resources{
+    display: table-row;
+    width: 100%;
+}
+#resources{
+    height: 40%;
+}
+#menu{
+    height: 60%;
+}
+#menu div, #resources div{
+    border: 4px solid red;
+    display: table-cell;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    height: 100%;
+    width: auto;
+}
+#resources div{
+    background: white;
+    border: 1px solid red;
+}
+#menu div p, #resources div p{
+    margin: 0 auto;
+    height: 100%;
+}
+.mouseOver{
+  background: lightpink;
+  transition: 0.2s;
+}
+.mouseOut{
+  background: white;
+  transition: 0.3s;
+}
+select{
+  font-size: 24px;
+  font-weight: bold;
+  font-family: monospace;
+  width: 80%;
+  border: 4px solid red;
+  cursor: pointer;
+}
+.auto{
+    align-self: auto;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+#villageSelect{
+  cursor: pointer;
+}
+#Select, #Select p{
+  cursor: context-menu;
+}
