@@ -5,31 +5,38 @@
     <div id="header">
         <div id="menu">
             <div>
-                <p class="auto">Map</p>
+                Map
             </div>
             <div id="Select">
-                <p><?php include 'scripts/village_select.php';?></p>
+                <?php include 'scripts/village_select.php';?>
             </div>
             <div id='Player'>
-                <p>player: <?php echo $_SESSION["username"]?></p>
+                player: <?php echo $_SESSION["username"]?>
+            </div>
+            <div id='renameVillage'>
+                <div id='renameInnerDiv'>
+                    Rename Village
+                    <input id='renameVillageInput'>
+                    <button id='renameVillageButton'>ok</button>
+                </div>
             </div>
             <div id='Logout'>
-                <p>Logout</p>
+                Logout
             </div>
         </div>
         <div id="resources">
             <?php include "scripts/resources.php";?>
             <div id="wheat">
-                <p>Wheat: <?php echo $res_arr["wheat"];?>
-                +<?php echo $res_arr["wheat_prod"];?>/h</p>
+                <img src="http://bga.rf.gd/images/resources/wheat.png">
+                <?php echo $res_arr["wheat"]." +".$res_arr["wheat_prod"]."/h";?>
             </div>
             <div id="wood">
-                <p>Wood: <?php echo $res_arr["wood"];?>
-                +<?php echo $res_arr["wood_prod"];?>/h</p>
+                <img src="http://bga.rf.gd/images/resources/wood.jpg">
+                <?php echo $res_arr["wood"]." +".$res_arr["wood_prod"]."/h";?>
             </div>
             <div id="stone">
-                <p>Stone: <?php echo $res_arr["stone"];?>
-                +<?php echo $res_arr["stone_prod"];?>/h</p>
+                <img src="http://bga.rf.gd/images/resources/stone.png">
+                <?php echo $res_arr["stone"]." +".$res_arr["stone_prod"]."/h";?>
             </div>
         </div>        
     </div>
@@ -51,23 +58,44 @@
             case 'Player':{
                 window.open("http://bga.rf.gd/scoreboard.php", "_self");
             }break;
+            case 'Rename Village':{
+                _renameVillageInput.style = "display: table-cell";
+                _renameVillageButton.style = "display: table-cell";
+            }break;
             default:
                 ;
         }
     }
+
     document.addEventListener('DOMContentLoaded', ()=>
         {
+            _renameVillageInput = document.getElementById("renameVillageInput");
+            _renameVillageButton = document.getElementById("renameVillageButton");
+            _renameVillage = document.getElementById("renameVillage");
             _villageSelect = document.getElementById("villageSelect");
+
             _villageSelect.selectedIndex = <?php echo $_SESSION["selectedIndex"];?>;
+
+            _renameVillageButton.onclick = () =>{
+                if(_renameVillageInput.value)
+                {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("POST", "http://bga.rf.gd/scripts/rename_village.php", false);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send(`name=${_renameVillageInput.value}`);
+                    location.reload();
+                }
+            }
+
             _villageSelect.onchange = () => {
-                
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "http://bga.rf.gd/scripts/change_current_village.php", false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send(`index=${parseInt(_villageSelect.selectedIndex)}`);
-
                 location.reload();
             }
+
+
             var el = document.getElementById('menu').children;
             console.log(el);
             
@@ -80,6 +108,7 @@
                 el[i].onmouseout = () => el[i].className = 'mouseOut';
             }
             el[2].onclick = () => windowOpen("Player");
+            el[3].onclick = () => windowOpen("Rename Village");
         }
     )
     </script>

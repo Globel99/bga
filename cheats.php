@@ -9,11 +9,9 @@ $current_tile = $_SESSION["tiles"][$_GET["t"]];
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="styles/basic.css">
-        <link rel="stylesheet" type="text/css" href="styles/header.css">
-        <link rel="stylesheet" type="text/css" href="styles/scoreboard.css">
+
     </head>
     <body>
-        <?php include "header.php"; echo $header;?>
         <div id="main">
             <?php
                 echo "<div>";

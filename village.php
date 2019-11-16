@@ -16,7 +16,7 @@ include "scripts/db_connect.php";
 </head>
 <body>
     <?php include "header.php"; echo $header;?>
-
+    <div id="container">
     <div id="main">
         <div id="gridDiv">
             <div class="gridColumn">
@@ -55,6 +55,7 @@ include "scripts/db_connect.php";
         <br>
         <div id="cd"></div>
     </div>
+    </div>
 </body>
     <script>
         document.addEventListener('DOMContentLoaded', () =>{
@@ -65,7 +66,4 @@ include "scripts/db_connect.php";
         })
     </script>
 </html>
-<?php
-var_dump($_SESSION["selectedIndex"]);
-?>
 <?php $conn->close()?>
