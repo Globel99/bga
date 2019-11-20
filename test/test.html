@@ -1,0 +1,16 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://bga.rf.gd/scripts/js/simple_request.js"></script>
+    <script>
+        let a = new SimpleRequest();
+        let header = "username=szkuvi&tile=325&building=Town hall";
+        a.sendPOST('http://bga.rf.gd/scripts/php/api/post/build.php', header);
+        a.onload = () =>
+        {
+            console.log(a.responseText);
+        }
+    </script>
+</head>
+
+
+</html>

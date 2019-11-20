@@ -30,10 +30,6 @@
 #menu #Logout{
     width: 6%;
 }
-#resources div{
-    background: white;
-    border: 1px solid;
-}
 .mouseOver{
   background: lightpink;
   transition: 0.2s;
@@ -64,6 +60,8 @@ select{
     font-family: monospace;
 }
 img{
+    position: static;
+    width: 30px;
     margin: 2%;
     object-fit: contain;
 }

@@ -14,21 +14,22 @@
     height: 78%;
     width: 92%;
     margin: 0 auto;
-    margin-top: 6%;
+    margin-top: 4%;
 }
 .gridColumn{
     width: 100%;
     display: table-row;
 }
 .gridColumn div{
+    height: 17%;
+    width: 12%;
     display: table-cell;
     vertical-align: middle;
 }
-img{
-    width: 50px;
-    height: 30px;
-    display: inline-flex;
-    margin: 0 auto;
+.gridColumn div .building{
+    object-fit: contain;
+    height: 100px;
+    width: auto;
 }
 .mouseOverGrid{
     background: rgba(63, 88, 38, 0.71);

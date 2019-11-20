@@ -1,7 +1,7 @@
 <?php
 include "db_connect.php";
 
-$sql = "select * from all_events where finishTime <= addtime(current_timestamp(), '5:57:0')";
+$sql = "select * from all_events where finishTime <= addtime(current_timestamp(), '5:58:0')";
 $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result))

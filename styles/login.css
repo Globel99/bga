@@ -1,3 +1,7 @@
+body{
+    width: 100%;
+    height: 100%;
+}
 body, button{
     font-family: monospace;
     font-size: large;
@@ -15,7 +19,7 @@ button{
     border: 2px solid;
     background: #042214;
     white-space: pre-wrap;
-    margin: 0;
+    margin: auto;
     animation: borderColorChange 10s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
 }
 
@@ -47,7 +51,7 @@ button{
     font-weight: normal;
     background: black;
     display: block;
-    margin: 100px 400px 50px 400px;
+    margin: 0 auto;
     text-align: center;
     animation: colorChange 10s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
 }

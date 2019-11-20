@@ -9,5 +9,5 @@
     $sql = "update villages set name = '".$val."' where tile = ".$current;
     $result= mysqli_query($conn, $sql);
 
-    $_SESSION["villageName"][$_SESSION["selectedIndex"]] = $val;
+    $_SESSION["villageNames"][$_SESSION["selectedIndex"]] = $val;
 ?>

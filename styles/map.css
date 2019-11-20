@@ -91,3 +91,25 @@ select, option{
   background-color: white;
   transition: 0.3s;
 }
+#infoBox{
+    display: inline-block !important;
+    background: white;
+    color: black;
+    position: absolute;
+    border: 3px solid red;
+    visibility: hidden;
+}
+.showInfoBox{
+    visibility: visible !important;
+    z-index: +1;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.2s ease-in;
+}
+.hideInfoBox{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s ease-in;
+}
+td img{
+    cursor: pointer;
+}

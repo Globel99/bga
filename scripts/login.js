@@ -1,3 +1,18 @@
+/*function toggleFullScreen() {
+    var doc = window.document;
+    var docEl = doc.documentElement;
+  
+    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+  
+    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+      requestFullScreen.call(docEl);
+    }
+    else {
+      cancelFullScreen.call(doc);
+    }
+  }  
+  toggleFullScreen();*/
 document.addEventListener("DOMContentLoaded", ()=>{
     username_el = document.getElementById("username");
     pw_el = document.getElementById("pw");
@@ -5,6 +20,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     slider_el = document.getElementById("slider");
     warning_el = document.getElementById("warn");
 })
+fs = () => {
+    document.body.requestFullscreen();
+}
 
 function submit()
 {
