@@ -1,0 +1,16 @@
+body{
+    font-size: 24px;
+    font-family: 'Aldrich';
+    background-color: black;
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+}
+iframe{
+    height: 100%;
+    width: 100%;
+}
+.headerDiv{
+    height: 10%;
+}

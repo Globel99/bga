@@ -5,10 +5,10 @@
 
     $res_arr = array(
         "wheat" => $row["wheat"],
-        "wheat_prod" => $row["wheat_prod"],
+        "wheat_prod" => 30*$row["wheat_prod"],
         "wood" => $row["wood"],
-        "wood_prod" => $row["wood_prod"],
+        "wood_prod" => 30*$row["wood_prod"],
         "stone" => $row["stone"],
-        "stone_prod" => $row["stone_prod"],
+        "stone_prod" => 30*$row["stone_prod"],
     );
 ?>

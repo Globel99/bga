@@ -1,6 +1,6 @@
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=0.35">
+        <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1, user-scalable=0"/> <!--320-->
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="http://bga.rf.gd/styles/login.css">
         <script type="text/javascript" src="http://bga.rf.gd/scripts/login.js"></script>
@@ -15,7 +15,7 @@
             Password
             <input type="password" id="pw" onkeypress="keyPressed(event)">
             <p class="warning" id="warn">warning</p>
-            <button id="button" style="width: 100px" onclick="submit()">Login</button>
+            <button id="button" style="width: 100px" onclick="submit();">Login</button>
             <input id="slider" type="range" class="slider" min="1" max="2" value="0" onchange="changeSlider()">
         </div>
         <form id="approvedForm" method="POST" action="http://bga.rf.gd/map.php" target="_self">

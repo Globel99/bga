@@ -1,40 +1,45 @@
 #main, .events{
     border: 1px solid red;
     margin: 1%;
-    overflow: hidden;
+    display: table-cell;
 }
 #main{
     background-image: url("http://bga.rf.gd/images/village/village_original_onlyroad.jpg");
     background-size: 100% 100%;
-    width: 98%;
-    height: 70%;
+    width: 80%;
+    height: 100%;
 }
 #gridDiv{
     display: table;
     height: 78%;
     width: 92%;
     margin: 0 auto;
-    margin-top: 3%;
+    margin-top: 4%;
 }
 .gridColumn{
     width: 100%;
     display: table-row;
 }
 .gridColumn div{
+    height: 17%;
+    width: 12%;
     display: table-cell;
-    vertical-align: center;
-    text-align: center;
+    vertical-align: middle;
 }
-img{
-    width: 50px;
-    height: 30px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 20%;
+.gridColumn div .building{
+    object-fit: contain;
+    height: 100px;
+    width: auto;
 }
 .mouseOverGrid{
     background: rgba(63, 88, 38, 0.71);
 }
 .mouseOutGrid{
     background: none;
+}
+#container{
+    display: table;
+    width: 95%;
+    height: 70%;
+    margin: 0 auto;
 }

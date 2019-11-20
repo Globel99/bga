@@ -6,7 +6,7 @@ include "scripts/db_connect.php";
 ?>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=0.35">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=1, user-scalable=0"/> <!--320-->
     <meta charset="utf-8">
     <script type="text/javascript" src="scripts/countdown.js"></script>
     <script type="text/javascript" src="scripts/village.js"></script>
@@ -16,7 +16,7 @@ include "scripts/db_connect.php";
 </head>
 <body>
     <?php include "header.php"; echo $header;?>
-
+    <div id="container">
     <div id="main">
         <div id="gridDiv">
             <div class="gridColumn">
@@ -55,6 +55,7 @@ include "scripts/db_connect.php";
         <br>
         <div id="cd"></div>
     </div>
+    </div>
 </body>
     <script>
         document.addEventListener('DOMContentLoaded', () =>{
@@ -62,10 +63,30 @@ include "scripts/db_connect.php";
             if(mysqli_num_rows($result))
             echo "countdown('".$t."');";
         ?>
-        })
+        placeBuildings();
+
+        });
+
+        //js obj. létrehozás
+        (function () {
+            <?php
+                $sql = "select * from buildings where tile = ".$_SESSION["tiles"][$_SESSION["selectedIndex"]]." order by place asc";
+                
+                if($result = mysqli_query($conn, $sql))
+                {
+                    $arr = array();
+                    
+                    while($row = mysqli_fetch_assoc($result))
+                    {
+                        $arr["name"][] = str_replace(" ", "_", strtolower($row["building"]));
+                        $arr["level"][] = intval($row["level"]);
+                        $arr["place"][] = intval($row["place"]);
+                        
+                    }
+                    echo "buildings = ".json_encode($arr).";";
+                }
+            ?>
+        })();
     </script>
 </html>
-<?php
-var_dump($_SESSION["selectedIndex"]);
-?>
-<?php $conn->close()?>
+<?php $conn->close(); var_dump($arr, true);?>

@@ -1,9 +1,5 @@
 <?php
-    $host = "sql109.epizy.com";
-    $user = "epiz_24762160";
-    $db_password = "JuItz7HcclcW";
-    $db_name = "epiz_24762160_bga";
-    $conn = new mysqli($host, $user, $db_password, $db_name);
+    include $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
 
     $sql = $_GET["q"];
     $result = mysqli_query($conn, $sql);

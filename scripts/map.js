@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=>{
+    _table = document.getElementById("table");
+    _infoBox = document.getElementById("infoBox")
     headerRow = document.getElementById("header");
     headerChild = headerRow.querySelectorAll("td");
     xJump_el = document.getElementById("xJump");
@@ -22,6 +24,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     villageSelectFunc(villageSelect);
 })
 
+let lastSelectedCellForInfoBox;
 //kezdőképen a map bal felső sarka
 let x = 7;
 let y = 50;
@@ -33,7 +36,8 @@ get = (x, y) => {
 }
 
 function reloadMap(axis, direction) {
-
+    lastSelectedCellForInfoBox = null;
+    _infoBox.className = "hideInfoBox";
     if(axis){
         {
             if(axis === "x") x += direction;
@@ -53,12 +57,15 @@ function reloadMap(axis, direction) {
         table_el[r][0].innerHTML = "Y: " + (y + r + 1);
 
         for (let c = 0; c < 7; c++) {
-            table_el[r][c + 1].style.backgroundImage = `url('http://bga.rf.gd/images/backg/${backgArray[get(x + c, r + y)]}.jpg')`;
-            table_el[r][c + 1].style.border = "";
+            const currCell = table_el[r][c + 1];
+
+            currCell.style.backgroundImage = `url('http://bga.rf.gd/images/backg/${backgArray[get(x + c, r + y)]}.jpg')`;
+            currCell.style.border = "";
 
             if(layerArray[get(x + c, r + y)])
-            table_el[r][c+1].innerHTML = `<img src="http://bga.rf.gd/images/layer/${layerArray[get(x + c, r + y)]}.png">`;
-            else table_el[r][c+1].innerHTML = "";
+            currCell.innerHTML = `<img src="http://bga.rf.gd/images/layer/${layerArray[get(x + c, r + y)]}.png">`;
+            else currCell.innerHTML = "";
+            currCell.onclick = () => placeInfoBox(event, get(x + c, r + y));
         }
     }
 }
@@ -117,6 +124,57 @@ function villageSelectFunc(el){
     yJump_el.value = yOfVillage;
 
     jump();
+}
+
+placeInfoBox = (e, tile) =>
+{
+    console.log(e.target);
+    if(e.target == lastSelectedCellForInfoBox && _infoBox.className == "showInfoBox")
+    {
+        console.log("double select");
+        lastSelectedCellForInfoBox = null;
+    }else
+    {
+        lastSelectedCellForInfoBox = e.target;
+        let parent = e.target.offsetParent;
+        let offsetL = e.target.offsetLeft;
+        let offsetT = e.target.offsetTop;
+        while(parent != _table)
+        {
+            offsetL += parent.offsetLeft;
+            offsetT += parent.offsetTop;
+            parent = parent.offsetParent;
+            console.log("while");
+        }
+        offsetL += parent.offsetLeft + 50;
+        offsetT += parent.offsetTop - 100;
+        
+        _infoBox.style.left = offsetL + "px";
+        _infoBox.style.top = offsetT + "px";
+        console.log("Left:" + offsetL + " Top: " + offsetT);
+        console.log(tile);
+        createInfoBoxContent(tile);
+    }
+    _infoBox.className = "hideInfoBox";
+}
+
+fillInfoBox = (_json) =>
+{
+        let y = parseInt(_json["tile"]/64);
+        let x = _json["tile"] - (y*64);
+        y++;
+        x++;
+        str = "(" + x + ", " + y + ")<br>";
+
+    if(_json["type"] == "user"){
+        str += _json["username"] + "<br>" + _json["villageName"];
+    }else
+    {
+        str += _json["type"];
+    }
+    _infoBox.innerHTML = str;
+    console.log(_infoBox.innerHTML);
+    _infoBox.className = "showInfoBox";
 }
 
 function openLink(param){

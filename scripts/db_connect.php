@@ -7,4 +7,5 @@ $db_name = "epiz_24762160_bga";
 $conn = new mysqli($host, $user, $db_password, $db_name);
 
 $GLOBALS["conn"] = $conn;
+
 ?>
