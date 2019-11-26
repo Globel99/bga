@@ -1,0 +1,54 @@
+*{
+    text-align: center;
+    font-size: 24px;
+    font-family: monospace;
+}
+#input{
+    width: 70%;
+    text-align: left;
+}
+#upper{
+    height: 15%;
+    border-bottom: 1px solid grey;
+    padding-bottom: 2%;
+    margin-bottom: 3%;
+}
+#buttonDiv{
+    margin: 1%;
+}
+#iframe{
+    overflow-y: auto;
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+}
+#container{
+    overflow: hidden;
+    width: 90%;
+    height: 90%;
+}
+#navigate, #iframe{
+    float: left;
+}
+#navigate{
+    vertical-align: middle;
+    margin: 2%;
+}
+#navigate div{
+    cursor: pointer;
+    padding: 2px 10px;
+}
+#lower{
+    overflow: hidden;
+    height: 75%;
+    width: 100%;
+}
+body{
+    height: 90%;
+}
+.onMouseOver{
+    background: lightblue;
+}
+.onMouseOut{
+    background: white;
+}
