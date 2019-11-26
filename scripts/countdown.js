@@ -5,12 +5,12 @@ function countdown(finishTime)
     const date = new Date(Date.UTC(d[0], d[1]-1, d[2], d[3], d[4], d[5]));
     const countDownDate = date.getTime();
 
-    loop = () =>{
+    let dateArr = new Array(4);
+    let stringArr = ["d", "h", "m", "s"];
 
+    loop = () =>{
         let now = new Date().getTime()+3600*1000;
         let distance = countDownDate - now;
-        let dateArr = new Array(4);
-        let stringArr = ["d", "h", "m", "s"];
         //days
         dateArr[0] = Math.floor(distance / (1000 * 60 * 60 * 24));
         //hours
@@ -31,12 +31,35 @@ function countdown(finishTime)
                 x = true;
             }
         }
-    
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("cd").innerHTML = "EXPIRED";
-        }        
+        
+        console.log(distance);
+
+        if (distance < 1000) {
+            
+            //setTimeout(() => req.sendGET("http://bga.rf.gd/scripts/event_list.php", ""), 1500);
+            console.log(" sdf");
+            clearInterval(clock);
+
+            getQueueResponse = () =>{
+                let req = new SimpleRequest();
+                req.sendPOST("http://bga.rf.gd/scripts/php/api/post/queue_check.php", "tile=325");
+                req.onreadystatechange = () => {
+                    if(req.responseText == "free")
+                    window.open("http://bga.rf.gd/village.php", "_self");
+                    else {
+                        console.log(req.responseText);
+                    }
+                };
+            }
+            let check = setInterval(getQueueResponse, 1000);
+            //setTimeout(() => window.open("http://bga.rf.gd/village.php", "_self"), 2000);
+        }
     }
-    loop();
-    setInterval(loop, 1000);
+    if((countDownDate - new Date().getTime()+3600*1000) > 1000)
+    {
+        loop();
+        var clock = setInterval(loop, 1000);
+    }
+
+    
 }

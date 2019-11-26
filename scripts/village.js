@@ -1,38 +1,33 @@
 document.addEventListener('DOMContentLoaded', () =>{
-    grid = document.getElementById("gridDiv");
-    gridRows = grid.children;
+    grid = document.getElementById("wrapper");
+    grids = grid.children;
 
     const noBuild = [0,1,6,7,10,19,20,24,28,29,31,32,33,37,38,39];
 
     placeBuildings = () =>{
-        let curPlace = 0;
-        let index = 0;
-        for(let i=0;i<gridRows.length;i++)
+        let buildingIndex = 0;
+        for(let i=0;i<grids.length;i++)
         {
-            let gridColumns = gridRows[i].children;
-            for(let k=0;k<gridColumns.length;k++)
+            if(!noBuild.includes(i))
             {
                 
-                if(!noBuild.includes(curPlace))
+                if(buildings["place"] != null && buildings["place"].includes(i))
                 {
-                    gridColumns[k].onmouseover = () => gridColumns[k].className = "mouseOverGrid";
-                    gridColumns[k].onmouseout = () => gridColumns[k].className = "mouseOutGrid";
-                    
-                    if(buildings["place"] != null && buildings["place"].includes(curPlace))
-                    {
-                        const url = 
-                        "http://bga.rf.gd/images/buildings/" + buildings["name"][index] + "_" +
-                         buildings["level"][index] + ".jpg";
+                    const url = 
+                    "http://bga.rf.gd/images/buildings/" + buildings["name"][buildingIndex] + "_" +
+                    buildings["level"][buildingIndex] + ".jpg";
+                    const alt = buildings["name"][buildingIndex] + buildings["level"][buildingIndex];
+                    console.log(alt);
+                    grids[i].innerHTML = 
+                    //"<div><a href='http://bga.rf.gd/buildings/" + buildings["name"][buildingIndex] + ".php'><img class='building' src=" + url +" alt="+ alt +"></img></a></div>";
+                    "<a href='http://bga.rf.gd/buildings/" + buildings["name"][buildingIndex] + ".php'><img class='building' src=" + url +" alt="+ alt +"></img></a>";
 
-                        gridColumns[k].innerHTML = 
-                        "<a href='http://bga.rf.gd/buildings/" + buildings["name"][index] + ".php'><img class='building' src=" + url + "></img></a>";
-
-                        
-                        index++;
-                    }else
-                    gridColumns[k].innerHTML = "<a href='http://bga.rf.gd/buildings/empty.php'><img src='http://bga.rf.gd/images/village/empty.png'></img></a>";
+                    buildingIndex++;
+                }else
+                {
+                    //grids[i].innerHTML = "<div><a href='http://bga.rf.gd/buildings/empty.php?p="+ i +"'><img src='http://bga.rf.gd/images/village/empty.png'></img></a></div>";
+                    grids[i].innerHTML = "<a href='http://bga.rf.gd/buildings/empty.php?p="+ i +"'><img src='http://bga.rf.gd/images/village/empty.png'></img></a>";
                 }
-                curPlace++;
             }
         }
     }

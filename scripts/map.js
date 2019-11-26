@@ -1,29 +1,19 @@
 document.addEventListener("DOMContentLoaded", ()=>{
     _table = document.getElementById("table");
+    _tableParent = document.getElementById("tableParent");
+    size = 8;
+    initMap(size, false);
     _infoBox = document.getElementById("infoBox")
-    headerRow = document.getElementById("header");
-    headerChild = headerRow.querySelectorAll("td");
+    headerRow = document.getElementById("tableHeader");
     xJump_el = document.getElementById("xJump");
     yJump_el = document.getElementById("yJump");
     jumpCell_el = document.getElementById("jumpCell");
     villageSelect = document.getElementById("villageSelect");
-    table_el = new Array(7);
-    for(let i=0;i<7;i++)
-    {
-        table_el[i] = document.getElementById("tr"+i).querySelectorAll("td");
-    }
-    let divs = document.getElementById("mainHeader").children;
-        for(let i=0;i<divs.length;i++)
-        {
-            if(i == 2) continue;
-            divs[i].onmouseover = () => {divs[i].className = "headerMouseOver";}
-            divs[i].onmouseout = () => {divs[i].className = "headerMouseOut";}
-        } 
+    table_el = new Array();
 
-    reloadMap('x', 0);
+    //reloadMap('x', 0);
     villageSelectFunc(villageSelect);
 })
-
 let lastSelectedCellForInfoBox;
 //kezdőképen a map bal felső sarka
 let x = 7;
@@ -36,28 +26,28 @@ get = (x, y) => {
 }
 
 function reloadMap(axis, direction) {
-    lastSelectedCellForInfoBox = null;
     _infoBox.className = "hideInfoBox";
     if(axis){
         {
             if(axis === "x") x += direction;
             else if(axis === "y") y += direction;
         
-            if(x < 0 || x > 57) x -= direction;
-            if(y < 0 || y > 57) y -= direction;
+            if(x < 0 || x+size > 64) x -= direction;
+            if(y < 0 || y+size > 64) y -= direction;
         }
         
     }
     
-    
+    ////console.log(_table);
 
-    for (let r = 0; r < 7; r++) //map cellák
+    for (let r = 0; r < size; r++) //map cellák
     {
-        headerChild[r + 1].innerHTML = "X: " + (x + r + 1);
-        table_el[r][0].innerHTML = "Y: " + (y + r + 1);
+        _table.children[0].children[r + 1].innerHTML = (x + r + 1);
+        _table.children[r+1].children[0].innerHTML = (y + r + 1);
 
-        for (let c = 0; c < 7; c++) {
-            const currCell = table_el[r][c + 1];
+        for (let c = 0; c < size; c++) {
+            ////console.log(_table.children[r+1].children[c + 1]);
+            let currCell = _table.children[r+1].children[c + 1];
 
             currCell.style.backgroundImage = `url('http://bga.rf.gd/images/backg/${backgArray[get(x + c, r + y)]}.jpg')`;
             currCell.style.border = "";
@@ -67,6 +57,7 @@ function reloadMap(axis, direction) {
             else currCell.innerHTML = "";
             currCell.onclick = () => placeInfoBox(event, get(x + c, r + y));
         }
+        //console.log("reload");
     }
 }
 
@@ -81,7 +72,7 @@ function jump(){
         if(xVal < 4){
             x = 0;
             highlCellX = xVal;
-            console.log("xVal < 4 - " + highlCellX);
+            //console.log("xVal < 4 - " + highlCellX);
         } 
         else if(xVal > 61){
             x = 57;
@@ -104,9 +95,9 @@ function jump(){
             y = yVal - 4;
             highlCellY = 3;
         }
-        
+        /*
         reloadMap(0, 0);
-        table_el[highlCellY][highlCellX].style.border = "solid 2px red";
+        table_el[highlCellY][highlCellX].style.border = "solid 2px red";*/
     }
     
 }
@@ -139,7 +130,7 @@ placeInfoBox = (e, tile) =>
         let parent = e.target.offsetParent;
         let offsetL = e.target.offsetLeft;
         let offsetT = e.target.offsetTop;
-        while(parent != _table)
+        while(parent != _tableParent)
         {
             offsetL += parent.offsetLeft;
             offsetT += parent.offsetTop;
@@ -160,11 +151,11 @@ placeInfoBox = (e, tile) =>
 
 fillInfoBox = (_json) =>
 {
-        let y = parseInt(_json["tile"]/64);
-        let x = _json["tile"] - (y*64);
-        y++;
-        x++;
-        str = "(" + x + ", " + y + ")<br>";
+    let y = parseInt(_json["tile"]/64);
+    let x = _json["tile"] - (y*64);
+    y++;
+    x++;
+    str = "(" + x + ", " + y + ")<br>";
 
     if(_json["type"] == "user"){
         str += _json["username"] + "<br>" + _json["villageName"];
@@ -186,4 +177,72 @@ function openLink(param){
             window.open("http://bga.rf.gd/scripts/logout.php","_self");
          } break;
     }
+}
+
+initMap = (mapSize, reset) =>{
+    let border = true;
+    let fontSize = 0;
+    if(size > 40) {
+        document.getElementById("tableParent").style = "border-spacing: 0;";
+        var pixels = parseInt(560/size);
+    }else{
+        document.getElementById("tableParent").style = "border-spacing: 1px;";
+        var pixels = parseInt((560-(size*2))/size);
+    }
+    if(size > 40){
+        fontSize = 0;
+        document.getElementById("tableParent").style = "font-size: 1px";
+    }
+    else{
+        fontSize = 30-size;
+        document.getElementById("tableParent").style = "font-size: " + (40-size) + "px";
+    } 
+    if(reset) {
+        let k = 0;
+        while(_table.children[k]){
+            _table.removeChild(_table.children[k]);
+        }
+    }
+    _size = mapSize+1;
+    let nodeArrayOfRows = new Array(_size);
+    for(let c=0;c<nodeArrayOfRows.length;c++)
+    {
+        nodeArrayOfRows[c] = document.createElement("tr");
+
+        for(let r=0;r<_size;r++)
+        {
+            let td = document.createElement("td");
+            //td.style.border = "none";
+            nodeArrayOfRows[c].appendChild(td);
+        }
+        if(c) nodeArrayOfRows[c].children[0].id = "coord";
+
+        ////console.log(nodeArrayOfRows[c]);
+        _table.appendChild(nodeArrayOfRows[c]);
+    }
+    nodeArrayOfRows[0].id = "tableHeader";
+    //_table.onload = () =>reloadMap('x', 0);
+    for(let i=0;_table.children[i];i++)
+    {
+        for(let k=0;_table.children[i].children[k];k++)
+        {
+            _table.children[i].children[k].style.height = pixels + "px";
+            _table.children[i].children[k].style.width = pixels + "px";
+            if(_table.children[i].children[k].children[0])
+            _table.children[i].children[k].children[0].style.width = pixels + "px";
+        }
+    }
+
+    setTimeout(() => {
+        reloadMap('x', 0);
+    }, 30);
+    console.log(x+size);
+}
+zoom = (param) =>{
+    switch(param){
+        case 1: size++;break;
+        case 0: size--;break;
+        default: size = parseInt(document.getElementById("zoomInput").value);
+    }
+    initMap(size, true);
 }

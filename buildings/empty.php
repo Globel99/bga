@@ -8,6 +8,8 @@
 
 <html>
 <head>
+    <script type="text/javascript" src="http://bga.rf.gd/scripts/js/simple_request.js"></script>
+    <script type="text/javascript" src="http://bga.rf.gd/buildings/scripts/js/empty.js"></script>
     <link rel="stylesheet" type="text/css" href="http://bga.rf.gd/styles/basic.css">
     <link rel="stylesheet" type="text/css" href="http://bga.rf.gd/styles/header.css">
 </head>
@@ -33,8 +35,19 @@
         $buildingsArr = json_decode(file_get_contents("json/buildings.json"));
         while(isset($buildingsArr[$i]))
         {
-            echo "<div onclick='build(this.innerText);'>".$buildingsArr[$i]."</div>";
+            if(!isset($_SESSION["buildings"]) || !in_array($buildingsArr[$i], $_SESSION["buildings"]))
+            {
+                $name = str_replace("_", " ", $buildingsArr[$i]);
+                $name = ucfirst($name);
+    
+                echo "<div onclick='build(this.innerText, ".$_GET["p"].");'>".$name."</div>";
+            }
+
             $i++;
         }
     ?>
 </html>
+<?php
+    echo "<br><br>";
+    var_dump($_SESSION["buildings"]);
+?>

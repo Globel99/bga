@@ -8,7 +8,6 @@
 
 <html>
 <head>
-    <script type="text/javascript" src="http://bga.rf.gd/buildings/scripts/js/building_template.js"></script>
     <script type="text/javascript" src="http://bga.rf.gd/scripts/js/simple_request.js"></script>
     <script type="text/javascript" src="http://bga.rf.gd/buildings/scripts/js/town_hall.js"></script>
     <link rel="stylesheet" type="text/css" href="http://bga.rf.gd/styles/basic.css">

@@ -35,11 +35,11 @@
             }
         }
         if(mysqli_query($conn, $sql)) {
-            $messageINFO = date("Y.m.d") . " " . date("h:i:sa") . " " . "Resource added via Cheats menu to $tile, amount is $amount\n";
-            writeLog("INFO", $messageINFO);
+            $message = date("Y.m.d") . " " . date("h:i:sa") . " " . "Resource added via Cheats menu to $tile, amount is $amount\n";
+            writeLog("INFO", $message);
         } else { 
-            $messageERROR = date("Y.m.d") . " " . date("h:i:sa") . " " . "Error in resource addition via Cheats menu, some info: TILE: $tile | AMOUNT: $amount | WOOD: $wood | WHEAT: $wheat | STONE: $stone | SLIDER: $slider | SQL: $sql \n";
-            writeLog("ERROR", $messageERROR);
+            $message = date("Y.m.d") . " " . date("h:i:sa") . " " . "Error in resource addition via Cheats menu, some info: TILE: $tile | AMOUNT: $amount | WOOD: $wood | WHEAT: $wheat | STONE: $stone | SLIDER: $slider | SQL: $sql\n";
+            writeLog("ERROR", $message);
         }
     }
 

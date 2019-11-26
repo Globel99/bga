@@ -3,7 +3,6 @@
     ob_start();
     ?>
     <div id="header">
-        <div id="menu">
             <div>
                 Map
             </div>
@@ -14,17 +13,15 @@
                 player: <?php echo $_SESSION["username"]?>
             </div>
             <div id='renameVillage'>
-                <div id='renameInnerDiv'>
                     Rename Village
-                    <input id='renameVillageInput'>
-                    <button id='renameVillageButton'>ok</button>
-                </div>
+                    <div id="renameVillageInner">
+                        <input id='renameVillageInput'>
+                        <button id='renameVillageButton'>ok</button>  
+                    </div>
             </div>
             <div id='Logout'>
                 Logout
             </div>
-        </div>
-        <div id="resources">
             <div id="village">
                 Village
             </div>
@@ -34,14 +31,13 @@
                 <?php echo $res_arr["wheat"]." +".$res_arr["wheat_prod"]."/h";?>
             </div>
             <div id="wood">
-                <img src="http://bga.rf.gd/images/resources/wood.jpg">
+                <img src="http://bga.rf.gd/images/resources/wood.png">
                 <?php echo $res_arr["wood"]." +".$res_arr["wood_prod"]."/h";?>
             </div>
             <div id="stone">
                 <img src="http://bga.rf.gd/images/resources/stone.png">
                 <?php echo $res_arr["stone"]." +".$res_arr["stone_prod"]."/h";?>
-            </div>
-        </div>        
+            </div>       
     </div>
 
     <script>
@@ -62,8 +58,7 @@
                 window.open("http://bga.rf.gd/scoreboard.php", "_self");
             }break;
             case 'Rename Village':{
-                _renameVillageInput.style = "display: table-cell";
-                _renameVillageButton.style = "display: table-cell";
+                document.getElementById('renameVillageInner').classList.add("renameVillageActive");
             }break;
             default:
                 ;
@@ -99,18 +94,13 @@
             }
 
 
-            el = document.getElementById('menu').children;
-            el2 = document.getElementById('resources').children;
-            el = [...el, ...el2];
-            console.log(el);
+            el = document.getElementById('header').children;
             
             for(let i=0;i<el.length;i++)
             {
                 el[i].className = 'mouseOut';
                 if(i == 1) continue;
                 el[i].onclick = () => windowOpen(el[i].innerText);
-                el[i].onmouseover = () => el[i].className = 'mouseOver';
-                el[i].onmouseout = () => el[i].className = 'mouseOut';
             }
             el[2].onclick = () => windowOpen("Player");
             el[3].onclick = () => windowOpen("Rename Village");

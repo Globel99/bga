@@ -1,51 +1,39 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="http://bga.rf.gd/sql/sql.css">
+        <script type="text/javascript" src="index.js"></script>
     </head>
     <body>
         <div id="upper">
             <p>Query</p>
-            <input id="input" onkeypress="keyPressed(event)">
+            <input id="input" onkeypress="keyPressed(event)" type="text">
             <div id="buttonDiv">
-                <button onclick="process()">Process</button>
+                <button id="button">Process</button>
             </div>
         </div>
         <div id="lower">
             <p>Result</p>
-            <div>
+            <div id="container">
                 <div id="navigate"></div>
-                <div id="result">
-                    <iframe id="iframe" frameborder="0"></iframe>
-                </div>
+                <iframe id="iframe" frameborder="1"></iframe>
             </div>
         </div>
     </body>
-    <script>
-        const iframe = document.getElementById("iframe");
-        const input = document.getElementById("input");
-
-        process = (header) =>
-        {
-            let url = "http://bga.rf.gd/sql/query.php?q=" + header;
-            iframe.src = url;
-        }
-        function keyPressed(e)
-        {
-            if(e.keyCode == 13) {
-                process(input.value);
-            }
-        }
-    </script>
 
     <?php
         include $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
         $str;
         $res = mysqli_query($conn, "show tables");
-        while($row = mysqli_fetch_assoc($res))
+        $i = 0;
+        while(($row = mysqli_fetch_assoc($res)) && $i<30)
         {
-        $str .= "<div>".$row[0]."</div>";
+            $str .= "<div>".reset($row)."</div>";
+            $i++;
         }
-        echo "<script>document.getElementById('navigate').innerHTML = $str;</script>"
+        echo "<script>
+        document.getElementById('navigate').innerHTML = '$str';
+        initNavigate();
+        </script>";
     ?>
 
 </html>

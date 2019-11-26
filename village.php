@@ -1,7 +1,7 @@
 <?php
-file_get_contents("http://bga.rf.gd/scripts/event_list.php");
 session_start();
 if(!isset($_SESSION["isLoggedIn"])) die("gatya = (");
+file_get_contents("http://bga.rf.gd/scripts/event_list.php");
 include "scripts/db_connect.php";
 ?>
 <html>
@@ -10,51 +10,42 @@ include "scripts/db_connect.php";
     <meta charset="utf-8">
     <script type="text/javascript" src="scripts/countdown.js"></script>
     <script type="text/javascript" src="scripts/village.js"></script>
+    <script type="text/javascript" src="scripts/js/simple_request.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/basic.css">
     <link rel="stylesheet" type="text/css" href="styles/village.css">
     <link rel="stylesheet" type="text/css" href="styles/header.css">
 </head>
 <body>
     <?php include "header.php"; echo $header;?>
-    <div id="container">
     <div id="main">
-        <div id="gridDiv">
-            <div class="gridColumn">
+        <div id="container">
+            <div id="wrapper">
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
                 <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
             </div>
-            <div class="gridColumn">
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-            </div>
-            <div class="gridColumn">
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-            </div>
-            <div class="gridColumn">
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-            </div>
-            <div class="gridColumn">
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>            
-            </div>
-    </div>
-    </div>
-    <div class="events">
-        <?php
+        </div>
+        <div class="events">
+            <?php
 
-        $un = $_SESSION["username"];
-        $sql = "select * from all_events where username = '$un'";
-        $result = mysqli_query($conn, $sql);
+            $un = $_SESSION["username"];
+            $sql = "select * from events_buildings where tile = ".$_SESSION["tiles"][$_SESSION["selectedIndex"]];
+            $result = mysqli_query($conn, $sql);
 
-        if(mysqli_num_rows($result))
-        {
-            while($row2 = mysqli_fetch_assoc($result)) {
-                echo "<br>".$row2["type"]."  ".$row2["finishTime"];
-                $t = $row2["finishTime"];
+            if(mysqli_num_rows($result))
+            {
+                while($row2 = mysqli_fetch_assoc($result)) {
+                    echo "<br>".$row2["building"];
+                    $t = $row2["finishTime"];
+                }
             }
-        }
-        
-        ?>
+
+            ?>
         <br>
         <div id="cd"></div>
-    </div>
+        </div>
     </div>
 </body>
     <script>
@@ -67,7 +58,7 @@ include "scripts/db_connect.php";
 
         });
 
-        //js obj. létrehozás
+        //js 'buildings' obj. létrehozása amivel elérhetőek az épületek a placeBuildings()ben
         (function () {
             <?php
                 $sql = "select * from buildings where tile = ".$_SESSION["tiles"][$_SESSION["selectedIndex"]]." order by place asc";
@@ -76,12 +67,18 @@ include "scripts/db_connect.php";
                 {
                     $arr = array();
                     
+                    $i=0;
+                    unset($_SESSION["buildings"]);
                     while($row = mysqli_fetch_assoc($result))
                     {
                         $arr["name"][] = str_replace(" ", "_", strtolower($row["building"]));
                         $arr["level"][] = intval($row["level"]);
                         $arr["place"][] = intval($row["place"]);
-                        
+                        //if(!isset($_SESSION["buildings"][$i])){
+                            $_SESSION["buildings"][$i] = $row["building"];
+                            echo "console.log('set session buildings');";
+                        //}
+                        $i++;
                     }
                     echo "buildings = ".json_encode($arr).";";
                 }
@@ -89,4 +86,8 @@ include "scripts/db_connect.php";
         })();
     </script>
 </html>
-<?php $conn->close(); var_dump($arr, true);?>
+<?php
+$conn->close();
+//var_dump($_SESSION["buildings"]);
+echo time();
+?>
