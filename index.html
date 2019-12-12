@@ -2,21 +2,24 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1, user-scalable=0"/> <!--320-->
         <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="http://bga.rf.gd/styles/basic.css">
         <link rel="stylesheet" type="text/css" href="http://bga.rf.gd/styles/login.css">
         <script type="text/javascript" src="http://bga.rf.gd/scripts/login.js"></script>
     </head>
     <body>
         <div class="title">
-            <h1 id="titleInner">BrowserGame</h1>
+            <div>BrowserGame</div>
         </div>
-        <div class="form">
-            Username
-            <input type="text" id="username" onkeypress="keyPressed(event)">
-            Password
-            <input type="password" id="pw" onkeypress="keyPressed(event)">
-            <p class="warning" id="warn">warning</p>
-            <button id="button" style="width: 100px" onclick="submit();">Login</button>
-            <input id="slider" type="range" class="slider" min="1" max="2" value="0" onchange="changeSlider()">
+        <div class="formWrapper">
+            <div class="form">
+                <div>Username</div>
+                <input type="text" id="username" onkeypress="keyPressed(event)" required>
+                <div>Password</div>
+                <input type="password" id="pw" onkeypress="keyPressed(event)" required>
+                <p class="warning" id="warn"></p>
+                <button id="button" style="width: 100px" onclick="submit();">Login</button>
+                <input id="slider" type="range" class="slider" min="1" max="2" value="0" onchange="changeSlider()">
+            </div>
         </div>
         <form id="approvedForm" method="POST" action="http://bga.rf.gd/map.php" target="_self">
         </form>

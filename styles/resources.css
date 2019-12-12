@@ -1,0 +1,32 @@
+#container{
+    margin: auto auto;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(5, 1fr);
+    
+    width: 70%;
+    height: 80%;
+}
+#container div{
+    justify-items: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: grid;
+}
+.village{
+    background: blue;
+}
+
+.hillWithForest{
+    background: brown;
+}
+.plain{
+    background: lightgreen;
+}
+.forest{
+    background: darkgreen;
+}
+
+.resource{
+    border: 2px solid grey;
+}

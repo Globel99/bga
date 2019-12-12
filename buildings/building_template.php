@@ -29,7 +29,7 @@
     <div><h1><?php echo $title;?></h1></div>
     <div>
         <h3>Level: <?php echo $level;?></h3>
-        <button onmouseover="buttonOnMouse(this)" onmouseout="buttonOnMouse(this)" onclick="upgrade()" id="upgradeButton">Upgrade to LVL <?php echo $level+1;?></button>
+        <button onclick="upgrade('<?php echo $building;?>')" id="upgradeButton">Upgrade to LVL <?php echo $level+1;?></button>
         <div id="wrapper">
             <div id="upgradeResources">
                 <div></div><div></div><div></div><div></div><div></div><div></div>

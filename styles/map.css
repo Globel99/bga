@@ -2,11 +2,20 @@ body{
   margin: 2%;
 }
 table{
+    height: auto;
+    display: grid;
   text-align: center;
   margin: 0 auto;
   border-spacing: 1px;
 }
-
+.tableContainer{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    height: 75%;
+    vertical-align: center;
+    text-align: center;
+}
 td{
   text-align: center;
   box-sizing: border-box;

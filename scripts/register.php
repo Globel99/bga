@@ -1,5 +1,6 @@
 <?php
-    include "db_connect.php";
+    require "db_connect.php";
+    include $_SERVER['DOCUMENT_ROOT'].'/scripts/php/logger.php';
 
     $username = $_POST["username"];
     $pw = $_POST["pw"];
@@ -16,7 +17,13 @@
 
         if(mysqli_query($conn, $sql)) {
             echo "registration successful";
-        }else echo "username already exists";
+            $message = date("Y.m.d") . " " . date("h:i:sa") . " " . "$username succesfully registrated\n";
+            writeLog("INFO", $message);
+        } else {
+            echo "username already exists";
+            $message = date("Y.m.d") . " " . date("h:i:sa") . " " . "$username's, registration was unsuccesful. Password: $hashed_password\n";
+            writeLog("ERROR", $message);
+        }
     }
 
     mysqli_close($conn);

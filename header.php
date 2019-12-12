@@ -10,7 +10,7 @@
                 <?php include 'scripts/village_select.php';?>
             </div>
             <div id='Player'>
-                player: <?php echo $_SESSION["username"]?>
+                Player: <?php echo $_SESSION["username"]?>
             </div>
             <div id='renameVillage'>
                     Rename Village
@@ -19,11 +19,17 @@
                         <button id='renameVillageButton'>ok</button>  
                     </div>
             </div>
+            <div id="Units">
+                Units
+            </div>
             <div id='Logout'>
                 Logout
             </div>
             <div id="village">
                 Village
+            </div>
+            <div>
+                Resources
             </div>
             <?php include "scripts/resources.php";?>
             <div id="wheat">
@@ -37,31 +43,29 @@
             <div id="stone">
                 <img src="http://bga.rf.gd/images/resources/stone.png">
                 <?php echo $res_arr["stone"]." +".$res_arr["stone_prod"]."/h";?>
-            </div>       
+            </div>
+            <div id="Options">
+                Options
+            </div>
     </div>
 
     <script>
     function windowOpen(param){
+        const validParams = ['Map', 'Village', 'Scoreboard', 'Options', 'Resources', 'Units'];
         switch(param)
         {
-            
             case 'Logout':{
-                window.open('http://bga.rf.gd/scripts/logout.php', '_self');
-            }break;
-            case 'Map':{
-                window.open('http://bga.rf.gd/map.php', '_self');
-            }break;
-            case 'Village':{
-                window.open("http://bga.rf.gd/village.php", "_self");
-            }break;
-            case 'Player':{
-                window.open("http://bga.rf.gd/scoreboard.php", "_self");
+                window.open("http://bga.rf.gd/scripts/logout.php", "_self");
             }break;
             case 'Rename Village':{
                 document.getElementById('renameVillageInner').classList.add("renameVillageActive");
             }break;
             default:
-                ;
+                if(validParams.includes(param))
+                {
+                    window.open("http://bga.rf.gd/"+ param.toLowerCase() +".php", "_self");
+                }
+            ;
         }
     }
 
@@ -102,7 +106,7 @@
                 if(i == 1) continue;
                 el[i].onclick = () => windowOpen(el[i].innerText);
             }
-            el[2].onclick = () => windowOpen("Player");
+            el[2].onclick = () => windowOpen("Scoreboard");
             el[3].onclick = () => windowOpen("Rename Village");
             document.getElementById('village').onclick = () => windowOpen("Village");
         }

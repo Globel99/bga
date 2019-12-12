@@ -18,8 +18,9 @@
     display: grid;
     grid-template-columns: 1fr 4fr 1fr 4fr 1fr 4fr;
 }
-#upgradeResources div{
-
+#upgradeResources div img{
+    width: 100%;
+    padding: 10%;
 }
 button{
     border: 1px solid red;

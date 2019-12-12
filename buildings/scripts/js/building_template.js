@@ -1,12 +1,9 @@
-/*document.addEventListener("DOMContentLoaded", ()=>{
-    const parent = document.getElementById("upgradeResources");
-    const children = parent.children;
-    const arr = ["wheat", "wood", "stone"];
-
-    for(let i=0;i<3;i++)
-    {
-        src = "http://bga.rf.gd/images/resources/" + arr[i] + ".png";
-        children[i*2].innerHTML = `<img src="${src}"></img>`;
-        children[i*2+1].innerText = json[arr[i]][3];
+upgrade = (building) =>{
+    let req = new SimpleRequest();
+    const header = "building=" + building;
+    req.sendPOST("http://bga.rf.gd/scripts/php/api/post/build.php", header);
+    req.onload = () =>{
+        console.log(req.responseText);
+        window.open("http://bga.rf.gd/village.php", "_self");
     }
-});*/
+}

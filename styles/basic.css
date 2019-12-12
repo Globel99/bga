@@ -3,7 +3,7 @@ body{
     font-family: monospace;
     background-color: black;
     color: white;
-    margin: 0 auto;
+    margin: 1% !important;
     text-align: center;
     overflow: hidden;
 }

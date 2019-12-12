@@ -3,7 +3,7 @@ body{
 }
 #container, .events{
     border: 1px solid red;
-    display: table-cell;
+    display: grid;
 }
 #container{
     align-items: center;
@@ -38,9 +38,10 @@ body{
 #main{
     display: grid;
     width: 95%;
-    height: 70%;
+    height: 82%;
     grid-template-columns: 5fr 1fr;
-    gap: 15px;
+    gap: 50px;
+    margin-left: 2%;
 }
 img{
     width: 30px;
@@ -50,5 +51,9 @@ img{
     font-weight: 600;
 }
 #wrapper div a .building{
-    width: 60px;
+    width: 100px;
+}
+.events{
+    align-items: center;
+    justify-items: center;
 }

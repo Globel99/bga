@@ -1,5 +1,5 @@
 <?php
-    include "db_connect.php";
+    require "db_connect.php";
 
     $sql = "select * from villages";
     $decoded = json_decode(file_get_contents("http://bga.rf.gd/data/layer_array_data.json"));

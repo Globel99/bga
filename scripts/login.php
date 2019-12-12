@@ -1,5 +1,5 @@
 <?php
-    include "db_connect.php";
+    require "db_connect.php";
 
 
     if(!$conn) echo "connection failed";

@@ -2,7 +2,6 @@
     session_start();
     if(!isset($_SESSION["isLoggedIn"]) || !isset($_POST["building"])) die("gatya");
     require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
-    require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
     file_get_contents("http://bga.rf.gd/scripts/event_list.php");
 
     echo $username = $_SESSION["username"];
@@ -46,9 +45,12 @@
     //szükséges mennyiségű nyersanyag ellenőzése
     $sql = "select * from resources where tile = ".$tile;
     $row = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+
+    $wood = $json["wood"][$newLevel-1];
+    $wheat = $json["wheat"][$newLevel-1];
+    $stone = $json["stone"][$newLevel-1];
     
-    
-    if($row["wood"] >= $json["wood"][$newLevel] && $row["wheat"] >= $json["wheat"][$newLevel] && $row["stone"] >= $json["stone"][$newLevel])
+    if($row["wood"] >= $wood && $row["wheat"] >= $wheat && $row["stone"] >= $stone)
     {
         //ideiglenes szintek:
         if($buildingExisted){
@@ -80,12 +82,12 @@
         $finishTime = "addtime(".$startTime.", '".$time."')";
         $maxID = "(select max(id) from all_events)";
 
-        //all_event-be, events_buildings-be 1-1 sor beszúrása az eventhez
+        //all_event-be, events_buildings-be 1-1 sor beszúrása az eventhez, nyersanayag levonása
         $sql .= "set @id = (SELECT max(id) from all_events);";
         $sql .= "set @id = if(@id is null, 1, @id+1);";
         $sql .= "insert into all_events (id, username, startTime, finishTime, type) values (@id, '".$username."', ".$startTime.", ".$finishTime.", 'building');";
         $sql .= "insert into events_buildings values (@id, ".$tile.", '".$building."', ".$newLevel.", ".$finishTime.");";
-
+        $sql .= "update resources set wood = wood - ".$wood.", wheat = wheat - ".$wheat.", stone = stone - ".$stone." where tile = ".$tile.";";
         echo "\n".$sql;
         if(mysqli_multi_query($conn, $sql)){
             echo "\nEvent - $building to lvl $newLevel at tile $tile - addet at all_events";

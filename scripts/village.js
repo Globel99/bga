@@ -13,9 +13,15 @@ document.addEventListener('DOMContentLoaded', () =>{
                 
                 if(buildings["place"] != null && buildings["place"].includes(i))
                 {
-                    const url = 
-                    "http://bga.rf.gd/images/buildings/" + buildings["name"][buildingIndex] + "_" +
-                    buildings["level"][buildingIndex] + ".jpg";
+                    if(buildings["level"][buildingIndex] < 100)
+                    {
+                        var url = 
+                        "http://bga.rf.gd/images/buildings/" + buildings["name"][buildingIndex] + /*"_" +
+                        buildings["level"][buildingIndex] +*/ ".png";
+                    }
+                    else {
+                        var url = "http://bga.rf.gd/images/buildings/progress.png";
+                    }
                     const alt = buildings["name"][buildingIndex] + buildings["level"][buildingIndex];
                     console.log(alt);
                     grids[i].innerHTML = 

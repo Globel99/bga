@@ -1,5 +1,5 @@
 <?php
-    include "db_connect.php";
+    require "db_connect.php";
     include $_SERVER['DOCUMENT_ROOT'].'/scripts/php/logger.php';
 
     $sql = "update resources set wood = wood + wood_prod, wheat = wheat + wheat_prod, stone = stone + stone_prod";

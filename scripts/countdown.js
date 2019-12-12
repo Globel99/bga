@@ -8,6 +8,8 @@ function countdown(finishTime)
     let dateArr = new Array(4);
     let stringArr = ["d", "h", "m", "s"];
 
+    let _cd = document.getElementById("cd");
+
     loop = () =>{
         let now = new Date().getTime()+3600*1000;
         let distance = countDownDate - now;
@@ -20,14 +22,14 @@ function countdown(finishTime)
         //secs
         dateArr[3] = Math.floor((distance % (1000 * 60)) / 1000);
     
-        document.getElementById("cd").innerHTML = "";
+        _cd.innerHTML = "";
     
         //0 értékű kihagyása
         let x = false;
         for(let k=0;k<4;k++){
             if(dateArr[k] || x)
             {
-                document.getElementById("cd").innerHTML += dateArr[k] + stringArr[k] + " ";
+                _cd.innerHTML += dateArr[k] + stringArr[k] + " ";
                 x = true;
             }
         }

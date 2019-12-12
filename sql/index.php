@@ -21,7 +21,7 @@
     </body>
 
     <?php
-        include $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
+        require $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
         $str;
         $res = mysqli_query($conn, "show tables");
         $i = 0;

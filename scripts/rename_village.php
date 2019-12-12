@@ -1,5 +1,5 @@
 <?php
-    include "db_connect.php";
+    require "db_connect.php";
 
     session_start();
     if(!isset($_SESSION["isLoggedIn"])) die("gatya = (");

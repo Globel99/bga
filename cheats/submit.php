@@ -1,5 +1,5 @@
 <?php
-    include $_SERVER['DOCUMENT_ROOT'].'/scripts/php/logger.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/scripts/php/logger.php';
 
     $host = "sql109.epizy.com";
     $user = "epiz_24762160";

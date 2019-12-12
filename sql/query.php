@@ -1,5 +1,5 @@
 <?php
-    include $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
 
     $sql = $_GET["q"];
     if(!$result = mysqli_query($conn, $sql))

@@ -31,13 +31,18 @@ function reloadMap(axis, direction) {
         {
             if(axis === "x") x += direction;
             else if(axis === "y") y += direction;
-        
-            if(x < 0 || x+size > 64) x -= direction;
-            if(y < 0 || y+size > 64) y -= direction;
+            
+            if(!direction){
+                while(x+size > 64) x -= 1;
+                while(y+size > 64) y -= 1;
+            }
+
+            while(x<0 || x+size > 64) x -= direction;
+            while(y < 0 || y+size > 64) y -= direction;
         }
         
     }
-    
+    console.log("reloadmap x: " + x);
     ////console.log(_table);
 
     for (let r = 0; r < size; r++) //map cellák
@@ -69,35 +74,43 @@ function jump(){
 
     if(xVal > 0 && xVal < 65 && yVal > 0 && yVal < 65)
     {
-        if(xVal < 4){
+        highlight = () =>{
+            _table.children[highlCellY].children[highlCellX].style.border = "solid 1px red";
+        }
+
+        if(xVal < size/2){
             x = 0;
             highlCellX = xVal;
-            //console.log("xVal < 4 - " + highlCellX);
-        } 
-        else if(xVal > 61){
-            x = 57;
-            highlCellX = 4 + (xVal - 61);
-        } 
-        else{
-            x = xVal - 4;
-            highlCellX = 4;
-        } 
-
-        if(yVal < 4){
-            y = 0;
-            highlCellY = yVal - 1;
-        } 
-        else if(yVal > 61){
-            y = 57;
-            highlCellY = 3 + (yVal - 61);
-        } 
-        else {
-            y = yVal - 4;
-            highlCellY = 3;
         }
-        /*
+        else if(xVal > (64 - size/2)){
+            x = 64 - size;
+            highlCellX = xVal - x; 
+        }
+        else
+        {
+            x = xVal - parseInt(size/2);
+            highlCellX = size/2;
+        }
+
+        if(yVal < size/2){
+            y = 0;
+            highlCellY = yVal;
+        }
+        else if(yVal > (64 - size/2)){
+            y = 64 - size;
+            highlCellY = yVal - y; 
+        }
+        else
+        {
+            y = yVal - parseInt(size/2);
+            highlCellY = size/2;
+        }
+        console.log("highL x: " + highlCellX);
+        console.log("highL y: " + highlCellY);
+        console.log("x: " + x);
+        console.log("y: " + y);
         reloadMap(0, 0);
-        table_el[highlCellY][highlCellX].style.border = "solid 2px red";*/
+        _table.children[highlCellY].children[highlCellX].style.border = "solid 1px red";
     }
     
 }
@@ -155,14 +168,13 @@ fillInfoBox = (_json) =>
     let x = _json["tile"] - (y*64);
     y++;
     x++;
-    str = "(" + x + ", " + y + ")<br>";
+    _json["tile"] = "(" + x + ", " + y + ")";
+    let str = "";
 
-    if(_json["type"] == "user"){
-        str += _json["username"] + "<br>" + _json["villageName"];
-    }else
-    {
-        str += _json["type"];
-    }
+    Object.values(_json).forEach((value) => {
+        str += value + "<br>";
+    })
+
     _infoBox.innerHTML = str;
     console.log(_infoBox.innerHTML);
     _infoBox.className = "showInfoBox";
@@ -180,8 +192,6 @@ function openLink(param){
 }
 
 initMap = (mapSize, reset) =>{
-    let border = true;
-    let fontSize = 0;
     if(size > 40) {
         document.getElementById("tableParent").style = "border-spacing: 0;";
         var pixels = parseInt(560/size);
@@ -244,5 +254,6 @@ zoom = (param) =>{
         case 0: size--;break;
         default: size = parseInt(document.getElementById("zoomInput").value);
     }
-    initMap(size, true);
+    if(size < 65) initMap(size, true);
+    else size = 64;
 }

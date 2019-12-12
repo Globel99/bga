@@ -1,8 +1,8 @@
 <?php
-session_start();
-if(!isset($_SESSION["isLoggedIn"])) die("gatya = (");
-file_get_contents("http://bga.rf.gd/scripts/event_list.php");
-include "scripts/db_connect.php";
+    session_start();
+    if(!isset($_SESSION["isLoggedIn"])) die("gatya = (");
+    file_get_contents("http://bga.rf.gd/scripts/event_list.php");
+    include "scripts/db_connect.php";
 ?>
 <!-- aa -->
 <html>
@@ -21,9 +21,11 @@ include "scripts/db_connect.php";
 <body>
     <?php include "header.php"; echo $header;?>
     <div id="infoBox"></div>
-    <table id="tableParent">
-        <tbody id="table"></tbody>
-    </table>
+    <div class="tableContainer">
+        <table id="tableParent">
+            <tbody id="table"></tbody>
+        </table>
+    </div>
     <div id="buttons">
         <button onclick="reloadMap('y', -1)">🡹</button>
         <button onclick="reloadMap('y', 1)">🡻</button>
@@ -33,7 +35,7 @@ include "scripts/db_connect.php";
         <input id="xJump">
         <font>Y</font>
         <input id="yJump">
-        <button class="jump" onclick="zoom()">JUMP</button>
+        <button class="jump" onclick="jump()">JUMP</button>
         <button onclick="zoom(0)">+</button>
         <button onclick="zoom(1)">-</button>
         <input id="zoomInput">
@@ -58,9 +60,10 @@ include "scripts/db_connect.php";
 </script>
 
 <?php
-    echo "tiles:";
+    /*echo "tiles:";
     var_dump($_SESSION["tiles"]);
     echo "village:";
     var_dump($_SESSION["villageNames"]);
-?>
+    */
+    ?>
 </html>

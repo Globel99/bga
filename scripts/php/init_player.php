@@ -31,5 +31,17 @@
 
         $url = "http://bga.rf.gd/scripts/layer_array_replace.php?pw=szkuvi&rep=".$tile."&with=1";
         $contents = file_get_contents($url);
+    
+        
+        //nyersanyag mezők
+        $resource_fields = json_decode(file_get_contents("http://bga.rf.gd/data/resource_field_types.json"));
+        
+        require "resource_field_generator.php";
+
+        $resource_fields[$tile] = $arr;
+
+        file_put_contents($_SERVER['DOCUMENT_ROOT']."/data/resource_field_types.json", json_encode($resource_fields));
+        //
     }
+    
 ?>

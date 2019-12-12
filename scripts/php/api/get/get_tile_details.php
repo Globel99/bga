@@ -8,11 +8,12 @@
     
     $layer = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/data/layer_array_data.json'));
     $backg = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/data/backg_array_data.json'));
+    $resources = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/data/resource_field_types.json'));
     $array["tile"] = $tile;
 
     if($row = mysqli_fetch_assoc($result))
     {
-        $array["type"] = "user";
+        //$array["type"] = "user";
         $array["username"] = $row["username"];
         $array["villageName"] = $row["name"];
     }else if($layer[$tile] == 2)
@@ -29,5 +30,7 @@
         $array["type"] = "coast";
     }
 
+    $counts = array_count_values($resources[$tile]);
+    $array["land"] = "wheat: ".$counts[0]."f";
     echo json_encode($array);
 ?>

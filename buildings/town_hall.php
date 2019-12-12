@@ -2,7 +2,7 @@
     session_start();
     if(!isset($_SESSION["isLoggedIn"])) die("gatya = (");
     file_get_contents("http://bga.rf.gd/scripts/event_list.php");
-    include $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/scripts/db_connect.php';
 ?>
 
 

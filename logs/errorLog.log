@@ -17,3 +17,7 @@
 2019.11.21 04:32:06pm Error in resource addition via Cheats menu, some info: TILE: 2005 | AMOUNT:  | WOOD: 1 | WHEAT: 0 | STONE: 0 | SLIDER: 1 | SQL: UPDATE resources SET wood =  WHERE tile = '2005'
 2019.11.21 04:32:06pm Error in resource addition via Cheats menu, some info: TILE: 2005 | AMOUNT:  | WOOD: 1 | WHEAT: 0 | STONE: 0 | SLIDER: 1 | SQL: UPDATE resources SET wood =  WHERE tile = '2005'
 2019.11.21 04:32:07pm Error in resource addition via Cheats menu, some info: TILE: 2005 | AMOUNT:  | WOOD: 1 | WHEAT: 0 | STONE: 0 | SLIDER: 1 | SQL: UPDATE resources SET wood =  WHERE tile = '2005'
+2019.11.26 08:36:54pm Error in resource addition via Cheats menu, some info: TILE: 2801 | AMOUNT:  | WOOD: 1 | WHEAT: 0 | STONE: 0 | SLIDER: 1 | SQL: UPDATE resources SET wood =  WHERE tile = '2801'
+2019.12.01 02:05:09pm resource_prod.php process thrown an error... SORT IT OUT FAST!
+2019.12.02 09:58:23am resource_prod.php process thrown an error... SORT IT OUT FAST!
+2019.12.02 09:08:26pm resource_prod.php process thrown an error... SORT IT OUT FAST!
